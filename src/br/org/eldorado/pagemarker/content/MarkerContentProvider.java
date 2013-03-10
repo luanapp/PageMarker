@@ -226,6 +226,34 @@ public class MarkerContentProvider extends ContentProvider {
 	public int update(Uri uri, ContentValues values, String selection,
 			String[] selectionArgs) {
 		int updatedRows = 0;
+		SQLiteDatabase database = pageMarkerHelper.getWritableDatabase();
+		
+		String tableName = null;		
+		int uriMatch = _uriMatcher.match(uri);
+		switch (uriMatch) {
+		case USER_ID:
+			selection += " " + BaseColumns._ID + uri.getLastPathSegment();
+		case USERS:
+			tableName = UserTable.TABLE_NAME;
+			break;
+			
+		case BOOK_ID:
+			selection += " " + BaseColumns._ID + uri.getLastPathSegment();
+		case BOOKS:
+			tableName = BookTable.TABLE_NAME;
+			break;
+			
+		case MARKER_ID:
+			selection += " " + BaseColumns._ID + uri.getLastPathSegment();
+		case MARKERS:
+			tableName = MarkerTable.TABLE_NAME;
+			break;			
+
+		default:
+			throw new IllegalArgumentException("Invalid URI");
+		}
+		
+		updatedRows = database.update(tableName, values, selection, selectionArgs);
 		
 		// Notify the change for all content resolvers
 		getContext().getContentResolver().notifyChange(uri, null);
