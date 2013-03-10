@@ -1,4 +1,4 @@
-package br.org.eldorado.pagemarker.content;
+package br.org.eldorado.pagemarker.provider;
 
 import br.org.eldorado.pagemarker.database.BookTable;
 import br.org.eldorado.pagemarker.database.MarkerTable;
@@ -29,7 +29,7 @@ public class MarkerContentProvider extends ContentProvider {
 	private static final int MARKERS = 33;
 	private static final int MARKER_ID = 34;
 
-	private static final String AUTHORITY = "br.org.eldorado.pagemarker.content";
+	private static final String AUTHORITY = "br.org.eldorado.pagemarker.provider";
 
 	private static final String USERS_BASE_PATH = "user";
 	private static final String BOOKS_BASE_PATH = "book";
@@ -107,22 +107,22 @@ public class MarkerContentProvider extends ContentProvider {
 		
 		switch (uriMatch) {
 		case USER_ID:
-			mimeType = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/page-marker/user";
+			mimeType = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd/page-marker/user";
 			break;
 		case USERS:
-			mimeType = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/page-marker/users";
+			mimeType = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/vnd/page-marker/user";
 			break;
 		case BOOK_ID:
-			mimeType = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/page-marker/book";
+			mimeType = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd/page-marker/book";
 			break;
 		case BOOKS:
-			mimeType = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/page-marker/books";
+			mimeType = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/vnd/page-marker/book";
 			break;
 		case MARKER_ID:
-			mimeType = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/page-marker/marker";
+			mimeType = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd/page-marker/marker";
 			break;
 		case MARKERS:
-			mimeType = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/page-marker/markers";
+			mimeType = ContentResolver.CURSOR_DIR_BASE_TYPE+ "/vnd/page-marker/marker";
 			break;
 
 		default:
