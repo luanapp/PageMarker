@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="br.org.eldorado.pagemarker.MainActivity"
+            android:name="br.org.eldorado.pagemarker.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +22,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name=".provider.MarkerContentProvider"
+            android:authorities="br.org.eldorado.pagemarker.provider.markercontentprovider">
+            <path-permission
+                android:path=".user"
+                android:readPermission="br.org.eldorado.pagemarker.provider.permission.READ_USER"
+                android:writePermission="br.org.eldorado.pagemarker.provider.permission.WRITE_USER"/>
+            <path-permission
+                android:path=".book"
+                android:readPermission="br.org.eldorado.pagemarker.provider.permission.READ_BOOK"
+                android:writePermission="br.org.eldorado.pagemarker.provider.permission.WRITE_BOOK"/>
+            <path-permission
+                android:path=".marker"
+                android:readPermission="br.org.eldorado.pagemarker.provider.permission.READ_MARKER"
+                android:writePermission="br.org.eldorado.pagemarker.provider.permission.WRITE_MARKER"/>
+        </provider>
     </application>
 
 </manifest>

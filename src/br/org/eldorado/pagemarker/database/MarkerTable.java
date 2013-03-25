@@ -19,10 +19,14 @@ public final class MarkerTable implements BaseColumns {
 	private static final String CREATE_TABLE =
 			"CREATE TABLE " + TABLE_NAME + "("									// Create table statement for the book table
 			+ _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"						// Id column
-			+ COLUMN_ID_USER + " INTEGER NOT NULL REFERENCES TB_USER(ID),"		// UserId from user table
-			+ COLUMN_ID_BOOK + " INTEGER NOT NULL REFERENCES TB_BOOK(ID),"		// BookId from book table
+			+ COLUMN_ID_USER + " INTEGER NOT NULL,"								// UserId from user table
+			+ COLUMN_ID_BOOK + " INTEGER NOT NULL,"								// BookId from book table
 			+ COLUMN_PAGE + " INTEGER NULL,"									// Page being marked or
-			+ COLUMN_PIC + " TEXT NULL";										// Picture of the page being marked
+			+ COLUMN_PIC + " TEXT NULL," 										// Picture of the page being marked
+			+ "FOREIGN KEY (" + COLUMN_ID_USER + ") REFERENCES "
+			+ UserTable.TABLE_NAME + " (ID),"
+			+ "FOREIGN KEY (" + COLUMN_ID_BOOK + ") REFERENCES "
+			+ BookTable.TABLE_NAME + " (ID));";
 	
 	/**
 	 * Table drop script

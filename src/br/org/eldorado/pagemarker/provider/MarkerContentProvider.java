@@ -29,7 +29,7 @@ public class MarkerContentProvider extends ContentProvider {
 	private static final int MARKERS = 33;
 	private static final int MARKER_ID = 34;
 
-	private static final String AUTHORITY = "br.org.eldorado.pagemarker.provider";
+	private static final String AUTHORITY = "br.org.eldorado.pagemarker.provider.markercontentprovider";
 
 	private static final String USERS_BASE_PATH = "user";
 	private static final String BOOKS_BASE_PATH = "book";

@@ -19,10 +19,10 @@ public final class BookTable implements BaseColumns {
 	private static final String CREATE_TABLE =
 			"CREATE TABLE " + TABLE_NAME + "("					// Create table statement for the book table
 			+ _ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"		// Id column
-			+ COLUMN_TITLE		+ " TEXT NOT NULL"				// Book title
+			+ COLUMN_TITLE		+ " TEXT NOT NULL,"				// Book title
 			+ COLUMN_AUTHOR		+ " TEXT NULL,"					// Author, optional
 			+ COLUMN_EDITION	+ " TEXT NULL,"					// Edition, optional
-			+ COLUMN_PUBLISHER	+ " TEXT NULL"					// Publisher, optional
+			+ COLUMN_PUBLISHER	+ " TEXT NULL,"					// Publisher, optional
 			+ COLUMN_ISBN 		+ " TEXT NULL);";				// ISBN number, optional
 	
 	/**
