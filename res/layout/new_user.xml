@@ -3,22 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:text="@string/no_users" />
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
+    <QuickContactBadge
+        android:id="@+id/quickContactBadge1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/create_user"
-        android:onClick="newUserClick" />
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:id="@+id/editTextUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/user_name_hint"
+        android:inputType="textPersonName">
+    </EditText>
+    <Button
+        android:id="@+id/buttonCreateUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/button_save_user"
+        android:onClick="saveUser" />
 
 </LinearLayout>

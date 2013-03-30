@@ -7,5 +7,10 @@
     <string name="create_user">Create User</string>
     <string name="button_cancel">Cancel</string>
     <string name="create_user_text">You can create a user to manage your markers individually.</string>
+    <string name="new_user">New User</string>
+    <string name="error_user_get_names">It was not possible to retrieve the users.</string>
+    <string name="user_name">Username</string>
+    <string name="user_name_hint">Type an username</string>
+    <string name="button_save_user">Save user</string>
 
 </resources>
