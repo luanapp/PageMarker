@@ -2,6 +2,7 @@ package br.org.eldorado.pagemarker.activity;
 
 import android.app.Activity;
 import android.app.Service;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,16 +34,35 @@ public class NewUserActivity extends Activity {
                 }, 200);
         }
 
+        /**
+         * Method called by the activity button to save the filled user
+         * information.
+         * 
+         * @param view
+         */
         public void saveUser(View view) {
-                UserBO userBO = new UserBO(getContentResolver());
+                int savedUserId = 0;
                 EditText editTextUserName = (EditText) findViewById(R.id.editTextUserName);
+                String userName = editTextUserName.getText().toString();
 
-                // Save the user
                 try {
-                        userBO.createNewUser(editTextUserName.getText().toString());
+                        // Save the user
+                        UserBO userBO = new UserBO();
+                        savedUserId = userBO.createNewUser(userName);
                 } catch (BusinessException e) {
-                        Log.e(NewUserActivity.class.getName(), "User was not saved.");
-                        Toast.makeText(this, this.getString(R.string.error_user_get_names), Toast.LENGTH_SHORT).show();
+                        Log.e(NewUserActivity.class.getName(), String.format("User %s was not saved.", userName));
+                        Toast.makeText(this, String.format(this.getString(R.string.error_user_add), userName),
+                                Toast.LENGTH_SHORT).show();
                 }
+
+                // Show success message
+                Toast.makeText(this, String.format(this.getString(R.string.success_user_add), userName),
+                        Toast.LENGTH_SHORT).show();
+
+                // Return to main activity
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(MainActivity.CURRENT_USER_ID, savedUserId);
+                this.setResult(RESULT_OK, resultIntent);
+                this.finish();
         }
 }

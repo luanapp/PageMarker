@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/user_name_hint"
-        android:inputType="textPersonName">
+        android:inputType="textNoSuggestions">
     </EditText>
     <Button
         android:id="@+id/buttonCreateUser"

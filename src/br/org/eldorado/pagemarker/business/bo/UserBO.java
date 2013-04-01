@@ -1,22 +1,13 @@
 package br.org.eldorado.pagemarker.business.bo;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.database.Cursor;
 import br.org.eldorado.pagemarker.business.exception.BusinessException;
-import br.org.eldorado.pagemarker.persistence.database.UserTable;
-import br.org.eldorado.pagemarker.persistence.provider.MarkerContentProvider;
+import br.org.eldorado.pagemarker.persistence.dao.UserDAO;
+import br.org.eldorado.pagemarker.persistence.exception.PersistenceException;
+import br.org.eldorado.pagemarker.persistence.vo.User;
 
 public class UserBO {
-
-        private ContentResolver _resolver;
-
-        public UserBO(ContentResolver resolver) {
-                _resolver = resolver;
-        }
 
         /**
          * Get all registered users and return them as a list. If there is no
@@ -24,39 +15,53 @@ public class UserBO {
          * 
          * @return
          */
-        public List<String> getAllUserNames() throws BusinessException {
-                List<String> userNames = null;
+        public List<User> getAllUsers() throws BusinessException {
+                List<User> users = null;
 
                 try {
-                        Cursor cursor =
-                                _resolver.query(MarkerContentProvider.USERS_CONTENT_URI,
-                                        new String[] { UserTable.COLUMN_NAME }, null, null, null);
-
-                        if (cursor != null && cursor.moveToFirst()) {
-                                userNames = new ArrayList<String>();
-                                do {
-                                        String userName =
-                                                cursor.getString(cursor.getColumnIndex(UserTable.COLUMN_NAME));
-                                        userNames.add(userName);
-                                } while (cursor.moveToNext());
-                        }
+                        UserDAO userDAO = new UserDAO();
+                        users = userDAO.getAllUsers();
                 } catch (Exception ex) {
                         throw new BusinessException(ex.getCause());
                 }
 
-                return userNames;
+                return users;
         }
 
-        public boolean createNewUser(String username) throws BusinessException {
-                boolean success = false;
+        /**
+         * Get user with the given id. If it was not found, null is returned.
+         * 
+         * @return
+         */
+        public User getUserById(int id) throws BusinessException {
+                User user = null;
+
                 try {
-                        ContentValues values = new ContentValues();
-                        values.put(UserTable.COLUMN_NAME, username);
-                        _resolver.insert(MarkerContentProvider.USERS_CONTENT_URI, values);
-                        success = true;
+                        UserDAO userDAO = new UserDAO();
+                        user = userDAO.getUserById(id);
                 } catch (Exception ex) {
                         throw new BusinessException(ex.getCause());
                 }
-                return success;
+
+                return user;
+        }
+
+        /**
+         * Creates a new user with the given username and returns the id for the
+         * created user instance.
+         * 
+         * @param username
+         * @return user id.
+         * @throws PersistenceException
+         */
+        public int createNewUser(String username) throws BusinessException {
+                int createdUserId = 0;
+                try {
+                        UserDAO userDAO = new UserDAO();
+                        createdUserId = userDAO.createNewUser(username);
+                } catch (Exception ex) {
+                        throw new BusinessException(ex.getCause());
+                }
+                return createdUserId;
         }
 }

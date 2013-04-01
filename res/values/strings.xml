@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- MainActivity -->
     <string name="app_name">PageMarker</string>
     <string name="no_users">No users found</string>
     <string name="menu_settings">Settings</string>
-    <string name="create_user">Create User</string>
-    <string name="button_cancel">Cancel</string>
-    <string name="create_user_text">You can create a user to manage your markers individually.</string>
-    <string name="new_user">New User</string>
     <string name="error_user_get_names">It was not possible to retrieve the users.</string>
+    
+    <!-- NewUserActivity -->
+    <string name="new_user">New User</string>
     <string name="user_name">Username</string>
     <string name="user_name_hint">Type an username</string>
     <string name="button_save_user">Save user</string>
+    <string name="error_user_add">It was not possible add user %s.</string>
+    <string name="success_user_add">User %s created successfully.</string>
 
 </resources>
