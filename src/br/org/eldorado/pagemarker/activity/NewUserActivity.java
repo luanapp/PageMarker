@@ -15,9 +15,42 @@ import br.org.eldorado.pagemarker.business.exception.BusinessException;
 
 public class NewUserActivity extends Activity {
 
+        public static final String DISPLAY_NO_USERS_TEXT =
+                "br.org.eldorado.pagemarker.activity.NewUserActivity.no_users";
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
+
+                boolean displayNoUserDialog = getIntent().getBooleanExtra(DISPLAY_NO_USERS_TEXT, false);
+
+                if (displayNoUserDialog) {
+                        setContentView(R.layout.no_users_dialog);
+                } else {
+
+                        setContentView(R.layout.new_user);
+
+                        // Force keyboard to appear
+                        final EditText editTextUserName = (EditText) findViewById(R.id.editTextUserName);
+                        editTextUserName.requestFocus();
+                        editTextUserName.postDelayed(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                        InputMethodManager imm =
+                                                (InputMethodManager) NewUserActivity.this.getSystemService(Service.INPUT_METHOD_SERVICE);
+                                        imm.showSoftInput(editTextUserName, InputMethodManager.SHOW_FORCED);
+                                }
+                        }, 200);
+                }
+        }
+
+        /**
+         * Update the view to display the new user dialog.
+         * 
+         * @param view
+         */
+        public void newUserClick(View view) {
                 setContentView(R.layout.new_user);
 
                 // Force keyboard to appear
